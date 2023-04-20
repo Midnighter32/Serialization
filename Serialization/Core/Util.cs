@@ -61,7 +61,7 @@ namespace Serialization.Core
             Console.WriteLine(obj.ToString(Newtonsoft.Json.Formatting.Indented));
         }
 
-        private static Root Deserialize(ref IList<Byte> buffer, ref Int16 iterator)
+        public static Root Deserialize(ref IList<Byte> buffer, ref Int16 iterator)
         {
             var wrapper = Encoder.Decode<Byte>(ref buffer, ref iterator);
             iterator -= 1;
@@ -88,7 +88,7 @@ namespace Serialization.Core
             return root;
         }
 
-        private static void Dump(ref Root root, ref JObject obj)
+        public static void Dump(ref Root root, ref JObject obj)
         {
             Int16 it = 0;
             switch ((Wrapper)root.wrapper)

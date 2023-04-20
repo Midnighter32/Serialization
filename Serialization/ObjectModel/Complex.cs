@@ -109,5 +109,10 @@ namespace Serialization.ObjectModel
 
             return new Complex("SYSTEM:empty");
         }
+
+        public Root ElementAt(int index)
+        {
+            return entities.ElementAt(index);
+        }
     }
 }

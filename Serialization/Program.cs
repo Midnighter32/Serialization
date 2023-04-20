@@ -30,69 +30,11 @@ namespace TestFrame
 
         internal static void TestUnpack()
         {
-            IList<Byte> foo = Util.Load("foo.psf");
+            Util.LoadNDump("foo.psf");
+            Util.LoadNDump("bar.psf");
+            Util.LoadNDump("baz.psf");
 
-            Int16 it = 0;
-            Primitive foo2 = Primitive.Unpack(ref foo, ref it);
-
-            var data = foo2.GetData();
-
-            Int16 it2 = 0;
-            Int32 primitive = Encoder.Decode<Int32>(ref data, ref it2);
-
-            Console.WriteLine("Primitive Value: " + primitive);
-
-            IList<Byte> bar = Util.Load("bar.psf");
-
-            it = 0;
-            Array bar2 = Array.Unpack(ref bar, ref it);
-
-            var data2 = bar2.data;
-
-            it2 = 0;
-            string str = Encoder.Decode(ref data2, ref it2, bar2.count);
-
-            Console.WriteLine("String Value: " + str);
-
-            IList<Byte> baz = Util.Load("baz.psf");
-
-            it = 0;
-            Array baz2 = Array.Unpack(ref baz, ref it);
-
-            var data3 = baz2.data;
-
-            it2 = 0;
-            IList<Int32> arr = new Int32[baz2.count];
-            Encoder.Decode(ref data3, ref it2, ref arr);
-
-            Console.WriteLine("Array Value: " + string.Join(", ", arr));
-
-            IList<Byte> obj = Util.Load("obj.psf");
-
-            it = 0;
-            Complex obj2 = Complex.Unpack(ref obj, ref it);
-
-            var data4 = obj2.FindPrimitiveByName("foo").GetData();
-
-            it2 = 0;
-            Int32 obj_primitive = Encoder.Decode<Int32>(ref data4, ref it2);
-
-            var array = obj2.FindByName("bar") as Array;
-            IList<Byte> data5 = (IList<byte>)(array?.data ?? Enumerable.Empty<Byte>());
-
-            it2 = 0;
-            string obj_str = Encoder.Decode(ref data5, ref it2, array?.count ?? 0);
-
-            var array2 = obj2.FindByName("baz") as Array;
-            IList<Byte> data6 = (IList<byte>)(array2?.data ?? Enumerable.Empty<Byte>());
-
-            it2 = 0;
-            IList<Int32> obj_array = new Int32[array2?.count ?? 0];
-            Encoder.Decode(ref data6, ref it2, ref obj_array);
-
-            Console.WriteLine("Object.Primitive Value: " + obj_primitive);
-            Console.WriteLine("Object.String Value: " + obj_str);
-            Console.WriteLine("Object.Array Value: " + string.Join(", ", obj_array));
+            Util.LoadNDump("obj.psf");
         }
     }
 }
